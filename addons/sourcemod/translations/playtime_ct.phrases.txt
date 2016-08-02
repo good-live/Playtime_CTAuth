@@ -1,0 +1,13 @@
+"Phrases"
+{
+	"Tag"
+	{
+		"en"		"[{green}PLG-VIP{default}]"
+	}
+	"Not enough playtime"
+	{
+		"#format"	"{1:i}"
+		"en"		"You need {purple}{1}{default} minutes to play as CT."
+		"de"		"Du brauchst {purple}{1}{default} Minuten um als Wärter zu spielen."
+	}
+}
