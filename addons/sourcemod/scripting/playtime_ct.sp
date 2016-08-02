@@ -3,7 +3,7 @@
 #define DEBUG
 
 #define PLUGIN_AUTHOR "good_live"
-#define PLUGIN_VERSION "<BUILD_ID>"
+#define PLUGIN_VERSION "1.0.<BUILD_ID>"
 
 #include <sourcemod>
 #include <sdktools>
