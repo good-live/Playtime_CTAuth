@@ -36,7 +36,7 @@ public void OnPluginStart()
 public Action Event_OnJoinTeam(int client, const char[] szCommand, int iArgCount)
 {
 	if(iArgCount < 1)
-		return Plugin_Continue;
+		return Plugin_Stop;
 	
 	char szData[2];
 	GetCmdArg(1, szData, sizeof(szData));
