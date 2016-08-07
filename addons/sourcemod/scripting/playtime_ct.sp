@@ -30,18 +30,21 @@ public void OnPluginStart()
 	
 	g_cMinTime = CreateConVar("pt_ct_min_time", "180000", "Minimal time (in secounds) to play as CT");
 	
+	HookEvent("player_team", Event_PlayerTeam_Post, EventHookMode_Post);
 	AddCommandListener(Event_OnJoinTeam, "jointeam");
 }
 
 public Action Event_OnJoinTeam(int client, const char[] szCommand, int iArgCount)
 {
 	if(iArgCount < 1)
-		return Plugin_Stop;
-	
+		return Plugin_Continue;
+		
 	char szData[2];
 	GetCmdArg(1, szData, sizeof(szData));
 	int iTeam = StringToInt(szData);
 	
+	if(!iTeam)
+		return Plugin_Stop;
 	if(iTeam != CS_TEAM_CT)
 		return Plugin_Continue;
 	
@@ -51,4 +54,20 @@ public Action Event_OnJoinTeam(int client, const char[] szCommand, int iArgCount
 		return Plugin_Stop;
 	}
 	return Plugin_Continue;
+}
+
+public void Event_PlayerTeam_Post(Handle hEvent, const char[] szName, bool bDontBroadcast)
+{
+	if(GetEventInt(hEvent, "team") != CS_TEAM_CT)
+		return;
+	
+	int client = GetClientOfUserId(GetEventInt(hEvent, "userid"));
+	
+	if(PT_GetPlayTime(client) < g_cMinTime.IntValue)
+	{
+		CPrintToChat(client, "%t %t", "Tag", "Not enough playtime", g_cMinTime.IntValue/60);
+		ForcePlayerSuicide(client);
+		ChangeClientTeam(client, CS_TEAM_T);
+		CS_RespawnPlayer(client);
+	}
 }
