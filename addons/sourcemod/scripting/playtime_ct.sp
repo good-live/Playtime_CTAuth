@@ -30,8 +30,10 @@ public void OnPluginStart()
 	
 	g_cMinTime = CreateConVar("pt_ct_min_time", "180000", "Minimal time (in secounds) to play as CT");
 	
-	HookEvent("player_team", Event_PlayerTeam_Post, EventHookMode_Post);
+	HookEvent("player_team", Event_PlayerTeam_Post);
 	AddCommandListener(Event_OnJoinTeam, "jointeam");
+	
+	AutoExecConfig(true);
 }
 
 public Action Event_OnJoinTeam(int client, const char[] szCommand, int iArgCount)
