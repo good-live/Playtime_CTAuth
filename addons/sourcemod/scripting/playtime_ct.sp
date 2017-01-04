@@ -74,7 +74,7 @@ public Action Timer_SlayPlayer(Handle hTimer, any iUserId)
 {
 	int client = GetClientOfUserId(iUserId);
 	
-	if ((IsClientValid(client) && (GetClientTeam(client) == CS_TEAM_CT))
+	if (IsClientValid(client) && GetClientTeam(client) == CS_TEAM_CT)
 	{
 		ForcePlayerSuicide(client);
 		ChangeClientTeam(client, CS_TEAM_T);
