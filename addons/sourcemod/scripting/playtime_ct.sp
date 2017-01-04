@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 #define PLUGIN_AUTHOR "good_live, shanapu"
-#define PLUGIN_VERSION "1.1.<BUILD_ID>"
+#define PLUGIN_VERSION "1.0.<BUILD_ID>"
 
 #include <sourcemod>
 #include <sdktools>
@@ -57,10 +57,10 @@ public Action Event_OnPlayerSpawn(Event event, const char[] name, bool bDontBroa
 	if (GetClientTeam(client) != 3) 
 		return Plugin_Continue;
 		
-	if (!IsValidClient(client, false, false))
+	if (!IsClientValid(client))
 		return Plugin_Continue;
 		
-	if (Reputation_GetRep(client) < gc_iMinReputation.IntValue)
+	if (PT_GetPlayTime(client) < g_cMinTime.IntValue)
 	{
 		CPrintToChat(client, "%t %t", "Tag", "Not enough playtime", g_cMinTime.IntValue/60);
 		CreateTimer(5.0, Timer_SlayPlayer, GetClientUserId(client), TIMER_FLAG_NO_MAPCHANGE);
