@@ -25,7 +25,7 @@
 
 
 //Defines
-#define MYJB_VERSION "Beta 9.1-<COMMIT>"
+#define MYJB_VERSION "Beta 8.1"
 #define MYJB_URL_LINK "https://github.com/shanapu/MyJailbreak"
 
 
@@ -50,35 +50,21 @@ public SharedPlugin:__pl_myjailbreak =
 #if !defined REQUIRE_PLUGIN
 public __pl_myjailbreak_SetNTVOptional()
 {
-	MarkNativeAsOptional("MyJailbreak_SetEventDayName");
-	MarkNativeAsOptional("MyJailbreak_GetEventDayName");
-	MarkNativeAsOptional("MyJailbreak_SetEventDayRunning");
-	MarkNativeAsOptional("MyJailbreak_IsEventDayRunning");
-	MarkNativeAsOptional("MyJailbreak_SetEventDayPlanned");
-	MarkNativeAsOptional("MyJailbreak_IsEventDayPlanned");
-	MarkNativeAsOptional("MyJailbreak_SetLastGuardRule");
-	MarkNativeAsOptional("MyJailbreak_IsLastGuardRule");
-	MarkNativeAsOptional("MyJailbreak_ActiveLogging");
-	MarkNativeAsOptional("MyJailbreak_FogOn");
-	MarkNativeAsOptional("MyJailbreak_FogOff");
-	MarkNativeAsOptional("MyJailbreak_BeaconOn");
-	MarkNativeAsOptional("MyJailbreak_BeaconOff");
+	MarkNativeAsOptional("SetEventDayName");
+	MarkNativeAsOptional("GetEventDayName");
+	MarkNativeAsOptional("SetEventDayRunning");
+	MarkNativeAsOptional("IsEventDayRunning");
+	MarkNativeAsOptional("SetEventDayPlanned");
+	MarkNativeAsOptional("IsEventDayPlanned");
+	MarkNativeAsOptional("SetLastGuardRule");
+	MarkNativeAsOptional("IsLastGuardRule");
+	MarkNativeAsOptional("ActiveLogging");
+	MarkNativeAsOptional("FogOn");
+	MarkNativeAsOptional("FogOff");
+	MarkNativeAsOptional("BeaconOn");
+	MarkNativeAsOptional("BeaconOff");
 }
 #endif
-
-
-
-/*****************************************************************************
-                   FORWARDS
-******************************************************************************/
-
-/*********************************************************
- * Called when a client trys to join the Guards(CT) or GuardQueue
- *
- * @param status		Client ID
- * @return 				Return Plugin_Handled to block & Plugin_Continue to pass the client.
- *********************************************************/
-forward Action MyJailbreak_OnJoinGuardQueue(int client);
 
 
 
@@ -93,7 +79,7 @@ forward Action MyJailbreak_OnJoinGuardQueue(int client);
  * @param name			The name of the Event Day
  * @NoReturn
  *********************************************************/
-native void MyJailbreak_SetEventDayName(const char[] name);
+native void SetEventDayName(const char[] name);
 
 
 /*********************************************************
@@ -102,7 +88,7 @@ native void MyJailbreak_SetEventDayName(const char[] name);
  *
  * @Return				The name of the Event Day
  *********************************************************/
-native void MyJailbreak_GetEventDayName(char[] name);
+native void GetEventDayName(char[] name);
 
 
 /*********************************************************
@@ -111,7 +97,7 @@ native void MyJailbreak_GetEventDayName(char[] name);
  * @param status		Boolean is running (true = running)
  * @NoReturn
  *********************************************************/
-native void MyJailbreak_SetEventDayRunning(bool status);
+native void SetEventDayRunning(bool status);
 
 
 /*********************************************************
@@ -120,7 +106,7 @@ native void MyJailbreak_SetEventDayRunning(bool status);
  *
  * @Return			true on running, false if not
  *********************************************************/
-native bool MyJailbreak_IsEventDayRunning();
+native bool IsEventDayRunning();
 
 
 /*********************************************************
@@ -129,7 +115,7 @@ native bool MyJailbreak_IsEventDayRunning();
  * @param status		Boolean is planned (true = running)
  * @NoReturn
  *********************************************************/
-native void MyJailbreak_SetEventDayPlanned(bool status);
+native void SetEventDayPlanned(bool status);
 
 
 /*********************************************************
@@ -138,7 +124,7 @@ native void MyJailbreak_SetEventDayPlanned(bool status);
  *
  * @Return			true on planned, false if not
  *********************************************************/
-native bool MyJailbreak_IsEventDayPlanned();
+native bool IsEventDayPlanned();
 
 
 /*********************************************************
@@ -147,7 +133,7 @@ native bool MyJailbreak_IsEventDayPlanned();
  * @param status		Boolean is active (true = active)
  * @NoReturn
  *********************************************************/
-native void MyJailbreak_SetLastGuardRule(bool status);
+native void SetLastGuardRule(bool status);
 
 
 /*********************************************************
@@ -156,7 +142,7 @@ native void MyJailbreak_SetLastGuardRule(bool status);
  *
  * @Return			true on active, false if not
  *********************************************************/
-native bool MyJailbreak_IsLastGuardRule();
+native bool IsLastGuardRule();
 
 
 /*********************************************************
@@ -165,7 +151,7 @@ native bool MyJailbreak_IsLastGuardRule();
  *
  * @Return			true on active, false if not
  *********************************************************/
-native bool MyJailbreak_ActiveLogging();
+native bool ActiveLogging();
 
 
 /*********************************************************
@@ -174,7 +160,7 @@ native bool MyJailbreak_ActiveLogging();
  *
  * @noreturn
  *********************************************************/
-native void MyJailbreak_FogOn();
+native void FogOn();
 
 
 /*********************************************************
@@ -183,7 +169,7 @@ native void MyJailbreak_FogOn();
  *
  * @noreturn
  *********************************************************/
-native void MyJailbreak_FogOff();
+native void FogOff();
 
 
 /*********************************************************
@@ -192,7 +178,7 @@ native void MyJailbreak_FogOff();
  *
  * @noreturn
  *********************************************************/
-native void MyJailbreak_BeaconOn(int client, float interval);
+native void BeaconOn(int client, float interval);
 
 
 /*********************************************************
@@ -201,4 +187,17 @@ native void MyJailbreak_BeaconOn(int client, float interval);
  *
  * @noreturn
  *********************************************************/
-native void MyJailbreak_BeaconOff(int client);
+native void BeaconOff(int client);
+
+/*****************************************************************************
+                   FORWARDS
+******************************************************************************/
+
+/*********************************************************
+ * Called when a client trys to join the Guards / GuardQueue
+ *
+ * @param status		Client ID
+ * @return                      Return Plugin_Handled to block the client.
+ *********************************************************/
+ 
+forward Action MyJB_OnClientJoinGuardQueue(int client);
